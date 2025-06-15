@@ -1,6 +1,6 @@
 import json
 
-data = json.load(open("./test_data.json"))
+data = json.load(open("testdata/test_data.json", encoding="utf-8"))
 
 class DataProvider:
 
