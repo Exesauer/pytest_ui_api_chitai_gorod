@@ -3,20 +3,29 @@
 # Автоматизация тестирования для проекта «Читай-город» на Python
 
 # Шаги
-1. Создать виртуальное окружение `python - m venv venv`
+1. Создать виртуальное окружение: `python - m venv venv`
+    - Python должен быть установлен и добавлен в PATH системы.
 2. Активировать виртуальное окружение:
-   - Для Windows:
-    `venv\Scripts\activate`
-   - Для macOS/Linux:
-    `source venv/bin/activate`
-3. Склонировать проект: `git clone https://github.com/Exesauer/pytest_ui_api_chitai_gorod.git`
-4. Установить все зависимости: `pip install -r requirements.txt`
-5. Заполнить файл с тестовыми данными: test_data.json
-6. Запустить все тесты: `pytest`
-    - Отдельно UI: `pytest ./tests_/tests_ui.py`
-    - Отдельно API: `pytest ./tests_/tests_api.py`
-7. Сгенерировать отчет: `allure generate allure-results --clean -o allure-report`
-8. Открыть отчет: `allure open allure-report`
+    - Для Windows(Command Prompt): `venv\Scripts\activate.bat`
+    - Для Windows (PowerShell): `venv\Scripts\Activate.ps1`
+    - Для macOS/Linux: `source venv/bin/activate`
+
+3. Склонировать проект с GitHub: `git clone https://github.com/Exesauer/pytest_ui_api_chitai_gorod.git`
+4. Установить все необходимые зависимости: `pip install -r requirements.txt`
+    > Совет: Если возникнут ошибки, необходимо проверить совместимость версий в requirements.txt и обновить пакеты.
+5. Перейти на сайт https://www.chitai-gorod.ru/ и выполнить вход с использованием номера телефона.
+6. Заполнить файл с тестовыми данными: test_data.json. 
+    - "username": "Имя, отображаемое в иконке профиля",
+    - "phone": "+7...",
+    - "token": "Bearer ... DevTools-Application-Cookies: (access-token)"
+    > Примечание: Токен действителен в течение одного часа. Используйте инструменты разработчика в браузере, чтобы получить его.
+7. Запустить все тесты: `pytest`
+    - только UI-тесты: `pytest ./tests_/tests_ui.py`
+    - только API-тесты: `pytest ./tests_/tests_api.py`
+    > Совет: Если pytest не установлен: `pip install pytest`
+8. Сгенерировать с помощью Allure: `allure generate allure-results --clean -o allure-report`
+   > Примечание: Убедитесь, что у вас установлен Allure. Установку Allure можно найти в официальной документации.
+9. Открыть отчет в браузере: `allure open allure-report`
 
 ### Стек:
 - **pytest**: Библиотека для написания и выполнения тестов.
