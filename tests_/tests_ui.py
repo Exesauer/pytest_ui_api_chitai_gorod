@@ -9,6 +9,7 @@ base_url = ConfigProvider().get("ui", "base_url")
 @pytest.mark.positive
 @allure.epic("Интернет-магазин «Читай-город»")
 @allure.feature("Тестовые сценарии UI")
+@allure.severity("CRITICAL")
 @allure.suite("UI: Позитивные тесты основного функционала магазина")
 class TestPositive:
     """
@@ -125,6 +126,22 @@ class TestPositive:
         self.browser.get(base_url)
 
     @allure.story("Функциональность корзины")
+    @allure.title("Проверка очистки корзины")
+    def test_clear_cart(self):
+        title_1, _ = random.choice(list(self.product_dictionary.items()))
+        count = 5
+        self.search.search_products(title_1)
+        self.cart.add_products_to_cart(count)
+        self.navigation.go_cart()
+        self.cart.clear_cart()
+        self.browser.refresh()
+
+        with allure.step("Проверка очистки содержимого корзины"):
+            assert self.cart.get_cart_items_count() == 0
+        with allure.step("Проверка значения индикатора после очистки"):
+            assert self.cart.get_indicator_value() == 0
+
+    @allure.story("Функциональность корзины")
     @allure.title("Проверка добавления товаров в корзину из результатов поиска")
     def test_add_products_to_cart(self, api_clear_cart):
         title_1, _ = random.choice(list(self.product_dictionary.items()))
@@ -140,22 +157,6 @@ class TestPositive:
             assert self.cart.get_indicator_value() == count
 
         self.cart.clear_cart()
-
-    @allure.story("Функциональность корзины")
-    @allure.title("Проверка очистки корзины")
-    def test_clear_cart(self):
-        title_1, _ = random.choice(list(self.product_dictionary.items()))
-        count = 5
-        self.search.search_products(title_1)
-        self.cart.add_products_to_cart(count)
-        self.navigation.go_cart()
-        self.cart.clear_cart()
-        self.browser.refresh()
-
-        with allure.step("Проверка очистки содержимого корзины"):
-            assert self.cart.get_cart_items_count() == 0
-        with allure.step("Проверка значения индикатора после очистки"):
-            assert self.cart.get_indicator_value() == 0
 
     @allure.story("Функциональность корзины")
     @allure.title("Проверка соответствия итоговой суммы в корзине и на этапе заказа")
@@ -176,6 +177,7 @@ class TestPositive:
 @pytest.mark.negative
 @allure.epic("Интернет-магазин «Читай-город»")
 @allure.feature("Тестовые сценарии UI")
+@allure.severity("NORMAL")
 @allure.suite("UI: Негативные тесты основного функционала магазина")
 class TestNegative:
     """

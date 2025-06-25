@@ -8,7 +8,6 @@ from typing import List
 import string
 import re
 
-
 class SearchPage:
 
     def __init__(self, driver: WebDriver) -> None:
@@ -45,15 +44,11 @@ class SearchPage:
             search_input = self.__driver.find_element(*search_input_locator)
 
             with allure.step(f"Попытка {attempts + 1} ввода текста '{product_name}'"):
-                search_input.send_keys(Keys.CONTROL + 'a')
-                search_input.send_keys(Keys.DELETE)
+                self.__driver.execute_script("arguments[0].value = '';", search_input)
                 search_input.send_keys(product_name)
 
             with allure.step("Проверка корректности введённого текста"):
-                entered_value = WebDriverWait(self.__driver, 10).until(
-                    lambda driver: driver.find_element(
-                        *search_input_locator).get_attribute("value")
-                )
+                entered_value = search_input.get_attribute("value")
                 if entered_value == product_name:
                     break
 

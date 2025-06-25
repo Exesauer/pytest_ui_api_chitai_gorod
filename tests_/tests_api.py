@@ -18,6 +18,7 @@ def delay_between_tests():
 @pytest.mark.positive
 @allure.epic("Интернет-магазин «Читай-город»")
 @allure.feature("Тестовые сценарии API")
+@allure.severity("CRITICAL")
 @allure.suite("API: Позитивные тесты функционала корзины")
 class TestCartPositive():
     """
@@ -142,6 +143,7 @@ class TestCartPositive():
 @pytest.mark.negative
 @allure.epic("Интернет-магазин «Читай-город»")
 @allure.feature("Тестовые сценарии API")
+@allure.severity("NORMAL")
 @allure.suite("API: Негативные тесты функционала корзины")
 class TestCartNegative():
     """
