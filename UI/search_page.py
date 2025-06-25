@@ -37,11 +37,12 @@ class SearchPage:
         search_input_locator = (
             By.XPATH,
             "//input[@name='search' and @class='search-form__input search-form__input--search']")
-        search_input = self.__driver.find_element(*search_input_locator)
+
         attempts = 0
         max_attempts = 3
 
         while attempts < max_attempts:
+            search_input = self.__driver.find_element(*search_input_locator)
 
             with allure.step(f"Попытка {attempts + 1} ввода текста '{product_name}'"):
                 search_input.send_keys(Keys.CONTROL + 'a')

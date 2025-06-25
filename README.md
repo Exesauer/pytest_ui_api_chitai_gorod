@@ -11,9 +11,12 @@
     `source venv/bin/activate`
 3. Склонировать проект: `git clone https://github.com/Exesauer/pytest_ui_api_chitai_gorod.git`
 4. Установить все зависимости: `pip install -r requirements.txt`
-5. Запустить тесты: `pytest`
-6. Сгенерировать отчет: `allure generate allure-results --clean -o allure-report`
-7. Открыть отчет: `allure open allure-report`
+5. Заполнить файл с тестовыми данными: test_data.json
+6. Запустить все тесты: `pytest`
+    - Отдельно UI: `pytest ./tests_/tests_ui.py`
+    - Отдельно API: `pytest ./tests_/tests_api.py`
+7. Сгенерировать отчет: `allure generate allure-results --clean -o allure-report`
+8. Открыть отчет: `allure open allure-report`
 
 ### Стек:
 - **pytest**: Библиотека для написания и выполнения тестов.
